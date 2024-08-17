@@ -157,7 +157,6 @@ class Store extends BaseStore {
    * @returns 
    */
    urlToPath(url) {
-      console.info(`media url:, ${url}`);
       var path = url;
       if(path.startsWith(this.host)){
         path = path.replace(this.host, "");
@@ -165,8 +164,6 @@ class Store extends BaseStore {
       if(path.startsWith("/")){
         path = path.substring(1);
       }
-      path = path.substring(0, ("" + path).lastIndexOf("/"))
-      console.info(`Media urlToPath: ${path}`)
       return path;
   }
 }
