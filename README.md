@@ -33,6 +33,24 @@ cp -r ./node_modules/ghost-storage-adapter-s3 ./content/adapters/storage/s3
   }
 }
 ```
+
+Using this adapter for images, medias, files upload, configuration is as following:  
+**copy this module to Ghost's content/adapter/storage/s3**
+
+"storage": {
+    "active": "s3",
+    "media":  "s3",
+    "files":  "s3",
+    "images": "s3",
+    "s3": {
+      "accessKeyId": "YOURKMNSDFDFDFDF",
+      "secretAccessKey": "YOURPGEiUQEB3lHL",
+      "bucket": "your-bucket-name",
+      "region": "ap-northeast-1"
+    }
+  }
+
+
 Note 1: Be sure to include "//" or the appropriate protocol within your assetHost string/variable to ensure that your site's domain is not prepended to the CDN URL.
 
 Note 2: if your s3 bucket enforces SSE use serverSideEncryption with the [appropriate supported](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property) value.

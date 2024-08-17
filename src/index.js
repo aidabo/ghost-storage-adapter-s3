@@ -92,7 +92,7 @@ class Store extends BaseStore {
         readFileAsync(image.path)
       ]).then(([ fileName, file ]) => {
         let config = {
-          ACL: this.acl,
+          //ACL: this.acl,
           Body: file,
           Bucket: this.bucket,
           CacheControl: `max-age=${30 * 24 * 60 * 60}`,
@@ -144,6 +144,30 @@ class Store extends BaseStore {
           Key: stripLeadingSlash(path)
         }, (err, data) => err ? reject(err) : resolve(data.Body))
     })
+  }
+
+  /**
+   * For bugfix: 
+   * "mediaStorage.urlToPath is not a function"
+   * TypeError: mediaStorage.urlToPath is not a function
+   * at prepareError (/var/www/sitename/versions/5.89.3/node_modules/@tryghost/mw-error-handler/lib/mw-error-handler.js:113:19)
+   * at Object.query (/var/www/sitename/versions/5.89.3/core/server/api/endpoints/media.js:39:57)
+   * 
+   * @param {*} url 
+   * @returns 
+   */
+   urlToPath(url) {
+      console.info(`media url:, ${url}`);
+      var path = url;
+      if(path.startsWith(this.host)){
+        path = path.replace(this.host, "");
+      }
+      if(path.startsWith("/")){
+        path = path.substring(1);
+      }
+      path = path.substring(0, ("" + path).lastIndexOf("/"))
+      console.info(`Media urlToPath: ${path}`)
+      return path;
   }
 }
 
