@@ -15,6 +15,8 @@ cp -r ./node_modules/ghost-storage-adapter-s3 ./content/adapters/storage/s3
 
 ## Configuration
 
+- For Image upload only
+
 ```json
 "storage": {
   "active": "s3",
@@ -34,22 +36,32 @@ cp -r ./node_modules/ghost-storage-adapter-s3 ./content/adapters/storage/s3
 }
 ```
 
+- For Images, Medias, Files upload
+
 Using this adapter for images, medias, files upload, configuration is as following:  
 **copy this module to Ghost's content/adapter/storage/s3**
 
+```json
 "storage": {
     "active": "s3",
     "media":  "s3",
     "files":  "s3",
     "images": "s3",
     "s3": {
-      "accessKeyId": "YOURKMNSDFDFDFDF",
-      "secretAccessKey": "YOURPGEiUQEB3lHL",
-      "bucket": "your-bucket-name",
-      "region": "ap-northeast-1"
+    "accessKeyId": "YOUR_ACCESS_KEY_ID",
+    "secretAccessKey": "YOUR_SECRET_ACCESS_KEY",
+    "region": "YOUR_REGION_SLUG",
+    "bucket": "YOUR_BUCKET_NAME",
+    "assetHost": "YOUR_OPTIONAL_CDN_URL (See note 1 below)",
+    "signatureVersion": "REGION_SIGNATURE_VERSION (See note 5 below)",
+    "pathPrefix": "YOUR_OPTIONAL_BUCKET_SUBDIRECTORY",
+    "endpoint": "YOUR_OPTIONAL_ENDPOINT_URL (only needed for 3rd party S3 providers)",
+    "serverSideEncryption": "YOUR_OPTIONAL_SSE (See note 2 below)",
+    "forcePathStyle": true,
+    "acl": "YOUR_OPTIONAL_ACL (See note 4 below)",
     }
   }
-
+```  
 
 Note 1: Be sure to include "//" or the appropriate protocol within your assetHost string/variable to ensure that your site's domain is not prepended to the CDN URL.
 

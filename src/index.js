@@ -147,8 +147,7 @@ class Store extends BaseStore {
   }
 
   /**
-   * For bugfix: 
-   * "mediaStorage.urlToPath is not a function"
+   * For bugfix to upload media: 
    * TypeError: mediaStorage.urlToPath is not a function
    * at prepareError (/var/www/sitename/versions/5.89.3/node_modules/@tryghost/mw-error-handler/lib/mw-error-handler.js:113:19)
    * at Object.query (/var/www/sitename/versions/5.89.3/core/server/api/endpoints/media.js:39:57)
